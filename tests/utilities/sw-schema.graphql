@@ -1164,3 +1164,29 @@ type VehiclesEdge {
   """A cursor for use in pagination"""
   cursor: String!
 }
+
+union SearchResult = Photo | Person
+
+type Photo {
+  height: Int
+  width: Int
+}
+
+type SearchQuery {
+  firstSearchResult: SearchResult
+}
+
+scalar Time
+scalar Url
+
+enum Direction {
+  NORTH
+  EAST
+  SOUTH
+  WEST
+}
+
+input Point2D {
+  x: Float
+  y: Float
+}
