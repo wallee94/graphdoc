@@ -1,0 +1,2 @@
+graphql-core==3.0.5
+Jinja2==2.11.2
