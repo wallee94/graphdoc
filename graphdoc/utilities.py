@@ -26,21 +26,15 @@ def build_types_reference(
     :return: definitions.TypeMapReference: map with definitions from schema
     """
     # parse schema to ast obj and filter out native graphql types
-    document_ast = graphql.parse(schema)
-    defs = [
-        definition.name.value
-        for definition in document_ast.definitions
-        if not isinstance(definition, graphql.SchemaDefinitionNode)
-    ]
     if isinstance(schema, str):
-        schema = graphql.utilities.build_ast_schema(document_ast)
+        schema = graphql.utilities.build_ast_schema(schema)
 
     type_map = {
         k: v for k, v in sorted(schema.type_map.items(), key=lambda t: t[1].name)
-        if k in defs or isinstance(v, graphql.GraphQLScalarType)
+        if not k.startswith('__')
     }
 
-    # parse the different type definitions in the schema
+    # separate the different type definitions in the schema
     reference = definitions.TypeMapReference()
     reference.query = schema.query_type
     reference.mutation = schema.mutation_type
