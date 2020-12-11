@@ -1,118 +1,161 @@
 {% filter trim %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <title>{{ configs.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ configs.style_src }}">
-    <!--  <link rel="alternate icon" type="image/png" href="/assets/images/site/favicon.png">-->
-    <!--  <link rel="icon" type="image/svg+xml" href="/assets/images/site/favicon.svg">-->
-</head>
-<body class="d-lg-flex">
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>{{ configs.title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ configs.style_src }}">
+        <!--  <link rel="alternate icon" type="image/png" href="/assets/images/site/favicon.png">-->
+        <!--  <link rel="icon" type="image/svg+xml" href="/assets/images/site/favicon.svg">-->
+    </head>
+    <body class="d-lg-flex">
 
-<div class="sidebar d-none d-lg-block">
-    <div class="d-flex flex-items-center p-4 position-sticky top-0 sidebar-background-color"
-         style="z-index: 3;" id="github-logo">
-        <a href="#" class="h4-mktg text-white no-underline no-wrap pl-2 flex-auto">
-            <img src="" alt="">
-        </a>
-    </div>
-    <ul class="sidebar-products">
-        <ul class="sidebar-categories list-style-none">
-            <li class="sidebar-category py-1">
-                <details class="dropdown-withArrow details details-reset" open>
-                    <summary>
-                        <div class="d-flex flex-justify-between">
-                            <a href="#about-the-api" class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Overview</a>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="octicon flex-shrink-0 arrow mr-3"
-                                 style="margin-top:7px" viewBox="0 0 16 16" width="16"
-                                 height="16">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"></path>
-                            </svg>
-                        </div>
-                    </summary>
-                    <ul class="sidebar-articles list-style-none">
-                        <li class="sidebar-article ">
-                            <a href="#about-the-api" class="pl-4 pr-5 py-1">About the GraphQL API</a>
-                        </li>
-                    </ul>
-                </details>
-            </li>
+    <div class="sidebar d-none d-lg-block">
+        <div class="d-flex flex-items-center p-4 position-sticky top-0 sidebar-background-color"
+             style="z-index: 3;" id="github-logo">
+            <a href="#" class="h4-mktg text-white no-underline no-wrap pl-2 flex-auto">
+                <img src="" alt="">
+            </a>
+        </div>
+        <ul class="sidebar-products">
+            <ul class="sidebar-categories list-style-none">
+                <li class="sidebar-category py-1">
+                    <details class="dropdown-withArrow details details-reset" open>
+                        <summary>
+                            <div class="d-flex flex-justify-between">
+                                <a href="#about-the-api"
+                                   class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Overview</a>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="octicon flex-shrink-0 arrow mr-3"
+                                     style="margin-top:7px" viewBox="0 0 16 16"
+                                     width="16"
+                                     height="16">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"></path>
+                                </svg>
+                            </div>
+                        </summary>
+                        <ul class="sidebar-articles list-style-none">
+                            <li class="sidebar-article ">
+                                <a href="#about-the-api" class="pl-4 pr-5 py-1">About
+                                    the GraphQL API</a>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
 
-            <li class="sidebar-category py-1 active ">
-                <details class="dropdown-withArrow details details-reset" open>
-                    <summary>
-                        <div class="d-flex flex-justify-between">
-                            <a href="#reference" class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Reference</a>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="octicon flex-shrink-0 arrow mr-3"
-                                 style="margin-top:7px" viewBox="0 0 16 16" width="16"
-                                 height="16">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"></path>
-                            </svg>
-                        </div>
-                    </summary>
-                    <ul class="sidebar-articles list-style-none">
-                        <li class="sidebar-article ">
-                            <a href="#queries"
-                               class="pl-4 pr-5 py-1">Queries</a>
-                        </li>
-                        <li class="sidebar-article ">
-                            <a href="#mutations"
-                               class="pl-4 pr-5 py-1">Mutations</a>
-                        </li>
-                        <li class="sidebar-article">
-                            <a href="#objects"
-                               class="pl-4 pr-5 py-1">Objects</a>
-                        </li>
-                        <li class="sidebar-article">
-                            <a href="#interfaces"
-                               class="pl-4 pr-5 py-1">Interfaces</a>
-                        </li>
-                        <li class="sidebar-article">
-                            <a href="#enums"
-                               class="pl-4 pr-5 py-1">Enums</a>
-                        </li>
-                        <li class="sidebar-article">
-                            <a href="#unions"
-                               class="pl-4 pr-5 py-1">Unions</a>
-                        </li>
-                        <li class="sidebar-article">
-                            <a href="#input-objects"
-                               class="pl-4 pr-5 py-1">Input objects</a>
-                        </li>
-                        <li class="sidebar-article">
-                            <a href="#scalars"
-                               class="pl-4 pr-5 py-1">Scalars</a>
-                        </li>
-                    </ul>
-                </details>
-            </li>
+                <li class="sidebar-category py-1 active ">
+                    <details class="dropdown-withArrow details details-reset" open>
+                        <summary>
+                            <div class="d-flex flex-justify-between">
+                                <a href="#reference"
+                                   class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Reference</a>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="octicon flex-shrink-0 arrow mr-3"
+                                     style="margin-top:7px" viewBox="0 0 16 16"
+                                     width="16"
+                                     height="16">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"></path>
+                                </svg>
+                            </div>
+                        </summary>
+                        <ul class="sidebar-articles list-style-none">
+                            {% if reference.query %}
+                                <li class="sidebar-article ">
+                                    <a href="#queries"
+                                       class="pl-4 pr-5 py-1">Queries</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.mutations %}
+                                <li class="sidebar-article ">
+                                    <a href="#mutations"
+                                       class="pl-4 pr-5 py-1">Mutations</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.objects %}
+                                <li class="sidebar-article">
+                                    <a href="#objects"
+                                       class="pl-4 pr-5 py-1">Objects</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.interfaces %}
+                                <li class="sidebar-article">
+                                    <a href="#interfaces"
+                                       class="pl-4 pr-5 py-1">Interfaces</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.enums %}
+                                <li class="sidebar-article">
+                                    <a href="#enums"
+                                       class="pl-4 pr-5 py-1">Enums</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.unions %}
+                                <li class="sidebar-article">
+                                    <a href="#unions"
+                                       class="pl-4 pr-5 py-1">Unions</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.input_objects %}
+                                <li class="sidebar-article">
+                                    <a href="#input-objects"
+                                       class="pl-4 pr-5 py-1">Input objects</a>
+                                </li>
+                            {% endif %}
+                            {% if reference.scalars %}
+                                <li class="sidebar-article">
+                                    <a href="#scalars"
+                                       class="pl-4 pr-5 py-1">Scalars</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </details>
+                </li>
+            </ul>
         </ul>
-    </ul>
-</div>
+    </div>
 
-<main class="width-full">
-    <main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-xl-flex">
-        <article class="markdown-body width-full">
-            {% include 'about.html' %}
-            <div id="reference">
-                {% include 'queries.html' %}
-                {% include 'mutations.html' %}
-                {% include 'objects.html' %}
-                {% include 'interfaces.html' %}
-                {% include 'enums.html' %}
-                {% include 'unions.html' %}
-                {% include 'input_objects.html' %}
-                {% include 'scalars.html' %}
-            </div>
-        </article>
+    <main class="width-full">
+        <main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-xl-flex">
+            <article class="markdown-body width-full">
+                {% include 'about.html' %}
+                <div id="reference">
+                    {% if reference.query %}
+                        {% include 'queries.html' %}
+                    {% endif %}
+
+                    {% if reference.mutation %}
+                        {% include 'mutations.html' %}
+                    {% endif %}
+
+                    {% if reference.objects %}
+                        {% include 'objects.html' %}
+                    {% endif %}
+
+                    {% if reference.interfaces %}
+                        {% include 'interfaces.html' %}
+                    {% endif %}
+                    {% if reference.enums %}
+                        {% include 'enums.html' %}
+                    {% endif %}
+
+                    {% if reference.enums %}
+                        {% include 'unions.html' %}
+                    {% endif %}
+
+                    {% if reference.input_objects %}
+                        {% include 'input_objects.html' %}
+                    {% endif %}
+
+                    {% if reference.scalars %}
+                        {% include 'scalars.html' %}
+                    {% endif %}
+                </div>
+            </article>
+        </main>
     </main>
-</main>
-</body>
-</html>
+    </body>
+    </html>
 {% endfilter %}

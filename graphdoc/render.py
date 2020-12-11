@@ -2,7 +2,7 @@ from typing import Union, Optional
 
 import graphql
 from jinja2 import Environment, PackageLoader, select_autoescape
-from configs import default_config
+from .configs import default_config
 from . import filters
 from . import utilities
 
