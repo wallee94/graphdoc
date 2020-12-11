@@ -4,3 +4,4 @@
 venv/
 __pycache__/
 testing_server/
+dist/
