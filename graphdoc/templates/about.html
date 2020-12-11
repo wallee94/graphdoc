@@ -9,6 +9,6 @@
         </div>
     </div>
     <div id="article-contents" class="article-grid-body">
-        {{ about_description|default(about_description_default, True)|markdown|safe }}
+        {{ config.about_description|markdown|safe }}
     </div>
 </div>
