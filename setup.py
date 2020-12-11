@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="graphdoc",
-    version="0.1.1",
+    version="0.1.2",
     author="Walther Lee",
     author_email="walthere.lee@gmail.com",
     description="Generate HTML docs for your GraphQL API",
