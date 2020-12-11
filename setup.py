@@ -4,8 +4,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="graphdoc-wallee94",
-    version="0.1.0",
+    name="graphdoc",
+    version="0.1.1",
     author="Walther Lee",
     author_email="walthere.lee@gmail.com",
     description="Generate HTML docs for your GraphQL API",
@@ -13,6 +13,11 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/wallee94/graphdoc",
     packages=setuptools.find_packages(),
+    install_requires=[
+        'graphql-core>=3',
+        'Jinja2>=2',
+        'markdown2>=2',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
