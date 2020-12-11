@@ -31,7 +31,7 @@ def build_types_reference(
 
     type_map = {
         k: v for k, v in sorted(schema.type_map.items(), key=lambda t: t[1].name)
-        if not k.startswith('__')
+        if not k.startswith('_')
     }
 
     # separate the different type definitions in the schema
@@ -46,25 +46,25 @@ def build_types_reference(
     for name, obj in type_map.items():
         # This is a long if-elif chain, but graphql has only 6 different
         # types in the specs, so it won't grow bigger soon
-        if isinstance(obj, graphql.GraphQLObjectType):
+        if graphql.is_object_type(obj):
             if obj != reference.query and obj != reference.mutation:
                 reference.objects.append(obj)
                 for interface in obj.interfaces:
                     implemented_by[interface.name].append(obj)
 
-        elif isinstance(obj, graphql.GraphQLScalarType):
+        elif graphql.is_scalar_type(obj):
             reference.scalars.append(obj)
 
-        elif isinstance(obj, graphql.GraphQLInterfaceType):
+        elif graphql.is_interface_type(obj):
             reference.interfaces.append(obj)
 
-        elif isinstance(obj, graphql.GraphQLUnionType):
+        elif graphql.is_union_type(obj):
             reference.unions.append(obj)
 
-        elif isinstance(obj, graphql.GraphQLEnumType):
+        elif graphql.is_enum_type(obj):
             reference.enums.append(obj)
 
-        elif isinstance(obj, graphql.GraphQLInputObjectType):
+        elif graphql.is_input_object_type(obj):
             reference.input_objects.append(obj)
 
     for interface in reference.interfaces:
