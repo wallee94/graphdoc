@@ -54,6 +54,6 @@ app = FastAPI()
 
 @app.get("/docs")
 async def graphql_docs():
-    html = graphdoc.to_doc(schema)
+    html = await graphdoc.to_doc_async(schema)
     return Response(content=html, media_type="text/html")
 ```
