@@ -1,0 +1,50 @@
+<div class="mt-2 article-grid-container">
+    <div class="article-grid-head">
+        <div class="d-flex flex-items-baseline flex-justify-between mt-3">
+            <h1 class="border-bottom-0" id="enums">Enums</h1>
+        </div>
+    </div>
+    <div class="article-grid-toc border-bottom border-xl-0 pb-4 mb-5 pb-xl-0 mb-xl-0">
+        <div class="article-grid-toc-content">
+            <h3 id="enums-in-this-section" class="f5 mb-2">
+                <a class="link-gray-dark" href="#enums-in-this-section">In this section</a>
+            </h3>
+            <ul class="list-style-none pl-0 f5 mb-0">
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#about-enums">About enums</a>
+                </li>
+                {% for enum in reference.enums %}
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#enums-{{ enum.name|slugify }}">{{ enum.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="article-contents" class="article-grid-body">
+        <h3 id="about-enums"><a href="#about-enums">About enums</a></h3>
+        <p>
+            <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Enums">Enums</a>
+            represent possible sets of values for a field.</p>
+        {% for enum in reference.enums %}
+        <div>
+            <div>
+                <h3 id="enums-{{ enum.name|slugify }}" class="pt-3">
+                    <a href="#enums-{{ enum.name|slugify }}">{{ enum.name }}</a>
+                </h3>
+                {{ enum.description|default('', True)|markdown|safe }}
+            </div>
+            <div>
+                <h4>Values</h4>
+                {% for value, obj in enum.values.items() %}
+                <p><strong>{{ value }}</strong></p>
+                <p></p>
+                {{ obj.description|default('', True)|markdown|safe }}
+                <p></p>
+                {% endfor %}
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+</div>

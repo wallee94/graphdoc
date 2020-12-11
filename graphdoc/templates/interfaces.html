@@ -1,0 +1,94 @@
+<div class="mt-2 article-grid-container">
+    <div class="article-grid-head">
+        <div class="d-flex flex-items-baseline flex-justify-between mt-3">
+            <h1 class="border-bottom-0" id="interfaces">Interfaces</h1>
+        </div>
+    </div>
+    <div class="article-grid-toc border-bottom border-xl-0 pb-4 mb-5 pb-xl-0 mb-xl-0">
+        <div class="article-grid-toc-content">
+            <h3 id="interfaces-in-this-section" class="f5 mb-2">
+                <a class="link-gray-dark" href="#interfaces-in-this-section">In this section</a>
+            </h3>
+            <ul class="list-style-none pl-0 f5 mb-0">
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#about-interfaces">About interfaces</a>
+                </li>
+                {% for interface in reference.interfaces %}
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#interfaces-{{ interface.name|slugify }}">{{ interface.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="article-contents" class="article-grid-body">
+        <h3 id="about-interfaces">
+            <a href="#about-interfaces">About interfaces</a>
+        </h3>
+        <p>
+            <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Interfaces">Interfaces</a>
+            serve as parent objects from which other objects can inherit.
+        </p>
+        {% for interface in reference.interfaces %}
+        <div>
+            <div>
+                <h3 id="interfaces-{{ interface.name|slugify }}" class="pt-3">
+                    <a href="#interfaces-{{ interface.name|slugify }}">{{ interface.name }}</a>
+                </h3>
+                {{ interface.description|default('', True)|markdown|safe }}
+            </div>
+            <div>
+                {% if interface.implemented_by %}
+                <h4>Implemented by</h4>
+                <ul>
+                    {% for implementation in interface.implemented_by %}
+                    <li>
+                        <code><a href="#objects-{{ implementation.name|slugify }}">{{ implementation.name }}</a></code>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <h4>Fields</h4>
+                <table class="fields width-full">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for name, field in interface.fields.items() %}
+                    <tr>
+                        <td>
+                            <p><code>{{ name }}</code> (<code><a href="#{{ field.type|gql_group }}-{{ field.type|string|slugify }}">{{ field.type|string }}</a></code>)</p>
+                        </td>
+                        <td>
+                            <p></p>
+                            {{ field.description|default('', True)|markdown|safe }}
+                            <p></p>
+                            {% if field.args %}
+                            <div class="border rounded-1 mt-3 mb-3 p-3 bg-gray-light f5">
+                                <p><b>Arguments</b></p>
+                                {% for arg_name, arg in field.args.items() %}
+                                <div class="border-top mt-2">
+                                    <p class="mt-2">
+                                        <code>{{ arg_name }}</code>(<code><a href="#{{ arg.type|gql_group }}-{{ arg.type|string|slugify }}">{{ arg.type|string }}</a></code>)
+                                    </p>
+                                    <p></p>
+                                    {{ arg.description|default('', True)|markdown|safe }}
+                                    <p></p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+</div>

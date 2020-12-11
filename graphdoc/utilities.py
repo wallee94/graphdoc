@@ -1,16 +1,20 @@
+from collections import defaultdict
 from typing import Union
 
 import graphql
-from jinja2 import Environment, PackageLoader, select_autoescape
 
 from . import definitions
 
-_template_name = 'graphql-docs.html'
-_jinja_env = Environment(
-    loader=PackageLoader('graphdoc', 'templates'),
-    autoescape=select_autoescape(['html', 'xml']),
-    enable_async=True
-)
+
+def unwrap_field_type(
+        field_type: graphql.GraphQLOutputType
+) -> graphql.GraphQLOutputType:
+    """
+    Unwraps field type from NonNull and List GraphQL type wrappers
+    """
+    while isinstance(field_type, (graphql.GraphQLNonNull, graphql.GraphQLList)):
+        field_type = field_type.of_type
+    return field_type
 
 
 def build_types_reference(
@@ -31,18 +35,28 @@ def build_types_reference(
     if isinstance(schema, str):
         schema = graphql.utilities.build_ast_schema(document_ast)
 
-    type_map = {k: v for k, v in schema.type_map.items() if k in defs}
+    type_map = {
+        k: v for k, v in sorted(schema.type_map.items(), key=lambda t: t[1].name)
+        if k in defs or isinstance(v, graphql.GraphQLScalarType)
+    }
 
     # parse the different type definitions in the schema
     reference = definitions.TypeMapReference()
     reference.query = schema.query_type
     reference.mutation = schema.mutation_type
+    if reference.mutation:
+        for name, field in reference.mutation.fields.items():
+            setattr(field, 'unwrapped_type', unwrap_field_type(field.type))
+
+    implemented_by = defaultdict(list)
     for name, obj in type_map.items():
         # This is a long if-elif chain, but graphql has only 6 different
         # types in the specs, so it won't grow bigger soon
         if isinstance(obj, graphql.GraphQLObjectType):
             if obj != reference.query and obj != reference.mutation:
                 reference.objects.append(obj)
+                for interface in obj.interfaces:
+                    implemented_by[interface.name].append(obj)
 
         elif isinstance(obj, graphql.GraphQLScalarType):
             reference.scalars.append(obj)
@@ -59,25 +73,7 @@ def build_types_reference(
         elif isinstance(obj, graphql.GraphQLInputObjectType):
             reference.input_objects.append(obj)
 
+    for interface in reference.interfaces:
+        setattr(interface, 'implemented_by', implemented_by[interface.name])
+
     return reference
-
-
-def to_doc(schema: Union[str, graphql.GraphQLSchema]) -> str:
-    """
-    Returns an html with the documentation from the schema
-    """
-    reference = build_types_reference(schema)
-    html = _jinja_env.get_template(_template_name).render(reference=reference)
-    return html
-
-
-async def to_doc_async(schema: Union[str, graphql.GraphQLSchema]) -> str:
-    """
-    Returns an html with the documentation from the schema using
-    jinja's asyncio implementation
-    """
-    reference = build_types_reference(schema)
-    html = await _jinja_env.get_template(_template_name).render_async(
-        reference=reference
-    )
-    return html

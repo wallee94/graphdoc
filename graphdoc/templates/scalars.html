@@ -1,0 +1,45 @@
+<div class="mt-2 article-grid-container">
+    <div class="article-grid-head">
+        <div class="d-flex flex-items-baseline flex-justify-between mt-3">
+            <h1 class="border-bottom-0" id="scalars">Scalars</h1>
+        </div>
+    </div>
+    <div class="article-grid-toc border-bottom border-xl-0 pb-4 mb-5 pb-xl-0 mb-xl-0">
+        <div class="article-grid-toc-content">
+            <h3 id="scalars-in-this-section" class="f5 mb-2">
+                <a class="link-gray-dark" href="#scalars-in-this-section">In this section</a>
+            </h3>
+            <ul class="list-style-none pl-0 f5 mb-0">
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#about-scalars">About scalars</a>
+                </li>
+                {% for scalar in reference.scalars %}
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#scalars-{{ scalar.name|slugify }}">{{ scalar.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="article-contents" class="article-grid-body">
+        <h3 id="about-scalars"><a href="#about-scalars">About scalars</a>
+        </h3>
+        <p>
+            <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Scalars">Scalars</a>
+            are primitive values: <code>Int</code>, <code>Float</code>,
+            <code>String</code>, <code>Boolean</code>, or <code>ID</code>.
+        </p>
+        <p>When calling the GraphQL API, you must specify nested subfields until you return only scalars.</p>
+        {% for scalar in reference.scalars %}
+        <div>
+            <div>
+                <h3 id="scalars-{{ scalar.name|slugify }}" class="pt-3">
+                    <a href="#scalars-{{ scalar.name|slugify }}">{{ scalar.name }}</a>
+                </h3>
+                {{ scalar.description|default('', True)|markdown|safe }}
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+</div>

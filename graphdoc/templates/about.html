@@ -1,0 +1,14 @@
+<div class="mt-2 article-grid-container">
+    <div class="article-grid-head">
+        <div class="d-flex flex-items-baseline flex-justify-between mt-3">
+            <h1 class="border-bottom-0" id="about-the-api">About the GraphQL API</h1>
+        </div>
+    </div>
+    <div class="article-grid-toc border-bottom border-xl-0 pb-4 mb-5 pb-xl-0 mb-xl-0">
+        <div class="article-grid-toc-content">
+        </div>
+    </div>
+    <div id="article-contents" class="article-grid-body">
+        {{ about_description|default(about_description_default, True)|markdown|safe }}
+    </div>
+</div>

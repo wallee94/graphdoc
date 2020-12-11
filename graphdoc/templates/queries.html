@@ -1,0 +1,72 @@
+<div class="mt-2 article-grid-container">
+    <div class="article-grid-head">
+        <div class="d-flex flex-items-baseline flex-justify-between mt-3">
+            <h1 class="border-bottom-0" id="queries">Queries</h1>
+        </div>
+    </div>
+    <div class="article-grid-toc border-bottom border-xl-0 pb-4 mb-5 pb-xl-0 mb-xl-0">
+        <div class="article-grid-toc-content">
+            <h3 id="queries-in-this-section" class="f5 mb-2">
+                <a class="link-gray-dark" href="#queries-in-this-section">In this section</a>
+            </h3>
+            <ul class="list-style-none pl-0 f5 mb-0">
+                <li class="ml-0  mb-2 lh-condensed">
+                    <a href="#about-queries">About queries</a>
+                </li>
+                {% for name, field in reference.query.fields.items() %}
+                    <li class="ml-0  mb-2 lh-condensed">
+                        <a href="#queries-{{ name|slugify }}">{{ name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="article-contents" class="article-grid-body">
+        <h3 id="about-queries"><a href="#about-queries">About queries</a></h3>
+        <p>Every GraphQL schema has a root type for both queries and
+            mutations. The <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Type-System">query type</a>
+            defines GraphQL operations that retrieve data from the server.
+        </p>
+        {% for name, field in reference.query.fields.items() %}
+            <div>
+                <div>
+                    <h3 id="queries-{{ name|slugify }}" class="pt-3">
+                        <a href="#queries-{{ name|slugify }}">{{ name }}</a>
+                    </h3>
+                    <p>
+                        <b>Type:</b>
+                        <a href="#{{ field.type|gql_group }}-{{ field.type|string|slugify }}">{{ field.type|string }}</a>
+                    </p>
+                    {{ field.description|default('', True)|markdown|safe }}
+                </div>
+                {% if field.args %}
+                    <div>
+                        <h4>Arguments</h4>
+                        <table class="fields width-full">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for arg_name, arg in field.args.items() %}
+                                <tr>
+                                    <td><p>
+                                        <code>{{ arg_name }}</code> (<code><a href="#{{ arg.type|gql_group }}-{{ arg.type|string|slugify }}">{{ arg.type|string }}</a></code>)
+                                    </p></td>
+                                    <td><p></p>
+                                        {{ arg.description|default('', True)|markdown|safe }}
+                                        <p></p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+</div>
