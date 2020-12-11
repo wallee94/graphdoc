@@ -27,11 +27,12 @@ def build_types_reference(
     """
     # parse schema to ast obj and filter out native graphql types
     if isinstance(schema, str):
-        schema = graphql.utilities.build_ast_schema(schema)
+        document_ast = graphql.parse(schema)
+        schema = graphql.utilities.build_ast_schema(document_ast)
 
     type_map = {
         k: v for k, v in sorted(schema.type_map.items(), key=lambda t: t[1].name)
-        if not k.startswith('_')
+        if not k.startswith('__')
     }
 
     # separate the different type definitions in the schema

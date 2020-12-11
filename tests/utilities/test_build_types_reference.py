@@ -31,7 +31,7 @@ class BuildTypesReference(TestCase):
 
     def test_finds_scalars(self):
         ref = build_types_reference(SCHEMA)
-        self.assertEqual(2, len(ref.scalars))
+        self.assertEqual(7, len(ref.scalars))
 
     def test_finds_input_objects(self):
         ref = build_types_reference(SCHEMA)
