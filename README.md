@@ -16,7 +16,7 @@ Install using pip:
 ## Usage
 
 You can use `graphdoc.to_doc` to convert a `GraphQLSchema` or a string to an HTML
-with the docs (or the awaitable `graphdoc.to_doc_async` if using asyncio).
+with the docs.
 
 ### Django and Graphene
 
@@ -27,7 +27,7 @@ from graphene_django.views import GraphQLView
 import graphdoc
 
 def graphql_docs(request):
-    html = graphdoc.to_doc(GraphQLView.schema)
+    html = graphdoc.to_doc(GraphQLView().schema)
     return HttpResponse(html, content_type='text/html')
     
 
@@ -60,6 +60,6 @@ app = FastAPI()
 
 @app.get("/docs")
 async def graphql_docs():
-    html = await graphdoc.to_doc_async(schema)
+    html = graphdoc.to_doc(schema)
     return Response(content=html, media_type="text/html")
 ```

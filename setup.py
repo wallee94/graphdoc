@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="graphdoc",
-    version="0.1.4",
+    version="0.2.0",
     author="Walther Lee",
     author_email="walthere.lee@gmail.com",
     description="Generate HTML docs for your GraphQL API",
@@ -15,7 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     package_data={'graphdoc': ['templates/*.html']},
     install_requires=[
-        'graphql-core>=3',
+        'graphql-core>=2.1.0,<4',
         'Jinja2>=2',
         'markdown2>=2',
     ],
