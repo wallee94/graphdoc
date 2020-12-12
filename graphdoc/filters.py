@@ -1,8 +1,9 @@
 import re
 import unicodedata
 
-from markdown2 import Markdown
 import graphql
+from markdown2 import Markdown
+
 from .utilities import unwrap_field_type
 
 markdowner = Markdown()
@@ -10,17 +11,17 @@ markdowner = Markdown()
 
 def gql_group(value) -> str:
     value = unwrap_field_type(value)
-    if graphql.is_object_type(value):
+    if isinstance(value, graphql.GraphQLObjectType):
         return 'objects'
-    elif graphql.is_scalar_type(value):
+    elif isinstance(value, graphql.GraphQLScalarType):
         return 'scalars'
-    elif graphql.is_interface_type(value):
+    elif isinstance(value, graphql.GraphQLInterfaceType):
         return 'interfaces'
-    elif graphql.is_union_type(value):
+    elif isinstance(value, graphql.GraphQLUnionType):
         return 'unions'
-    elif graphql.is_enum_type(value):
+    elif isinstance(value, graphql.GraphQLEnumType):
         return 'enums'
-    elif graphql.is_input_object_type(value):
+    elif isinstance(value, graphql.GraphQLInputObjectType):
         return 'input-objects'
     return ''
 

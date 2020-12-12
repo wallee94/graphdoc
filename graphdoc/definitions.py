@@ -1,7 +1,20 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Any
 
 import graphql
+
+
+class GraphQLField:
+    """Composition to add unwrapped_field to graphql.GraphQLField. GraphQLField uses
+    slots, so we cannot just set the attr """
+    unwrapped_type: graphql.GraphQLObjectType = None
+    _graphql_field: graphql.GraphQLField
+
+    def __init__(self, g_field) -> None:
+        self._graphql_field = g_field
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._graphql_field, name)
 
 
 @dataclass
