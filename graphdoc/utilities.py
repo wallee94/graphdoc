@@ -1,3 +1,4 @@
+import copy
 from collections import defaultdict
 from typing import Union
 
@@ -68,6 +69,7 @@ def build_types_reference(
     for name, obj in type_map.items():
         # This is a long if-elif chain, but graphql has only 6 different
         # types in the specs, so it won't grow bigger soon
+        obj = copy.copy(obj)
         if isinstance(obj, graphql.GraphQLObjectType):
             if obj != reference.query and obj != reference.mutation:
                 reference.objects.append(obj)
