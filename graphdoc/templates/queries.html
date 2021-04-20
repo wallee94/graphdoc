@@ -27,7 +27,7 @@
             mutations. The <a href="https://graphql.github.io/graphql-spec/June2018/#sec-Type-System">query type</a>
             defines GraphQL operations that retrieve data from the server.
         </p>
-        {% for name, field in reference.query.fields.items() %}
+        {% for name, field in reference.query.fields.items()|sort(attribute="0") %}
             <div>
                 <div>
                     <h3 id="queries-{{ name|slugify }}" class="pt-3">
