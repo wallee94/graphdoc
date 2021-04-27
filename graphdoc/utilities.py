@@ -1,5 +1,4 @@
-import copy
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 from typing import Union
 
 import graphql
@@ -12,6 +11,8 @@ except ImportError:
     from graphql.utils.build_ast_schema import build_ast_schema
 
 from . import definitions
+
+GraphQLEnumValue = namedtuple('GraphQLEnumValue', ('name', 'values'))
 
 
 def unwrap_field_type(
@@ -69,7 +70,6 @@ def build_types_reference(
     for name, obj in type_map.items():
         # This is a long if-elif chain, but graphql has only 6 different
         # types in the specs, so it won't grow bigger soon
-        obj = copy.copy(obj)
         if isinstance(obj, graphql.GraphQLObjectType):
             if obj != reference.query and obj != reference.mutation:
                 reference.objects.append(obj)
@@ -88,7 +88,7 @@ def build_types_reference(
         elif isinstance(obj, graphql.GraphQLEnumType):
             if isinstance(obj.values, list):
                 # graphql-core>=2.1.0,<3
-                obj.values = {v.name: v for v in obj.values}
+                obj = GraphQLEnumValue(obj.name, {v.name: v for v in obj.values})
             reference.enums.append(obj)
 
         elif isinstance(obj, graphql.GraphQLInputObjectType):

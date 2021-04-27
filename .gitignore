@@ -2,7 +2,7 @@ upload.sh
 *.pyc
 
 .idea/
-venv/
+*venv/
 __pycache__/
 testing_server/
 dist/
