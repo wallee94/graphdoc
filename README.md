@@ -1,6 +1,6 @@
 # Graphdoc - Generate docs for your GraphQL API
 
-Graphdoc uses you GraphQL schema to generate an HTML page documenting your API.
+Graphdoc uses your GraphQL schema to generate an HTML page documenting your API.
 It works with Graphene and Ariadne and any other framework generating `GraphQLSchema`
 instances from the `graphql-core` package.
 
@@ -15,8 +15,10 @@ Install using pip:
 
 ## Usage
 
-You can use `graphdoc.to_doc` to convert a `GraphQLSchema` or a string to an HTML
-with the docs.
+Use `graphdoc.to_doc` to create documentation from a `GraphQLSchema` instance 
+or a string with your schema in SDL.
+
+## Examples
 
 ### Django and Graphene
 
@@ -63,5 +65,59 @@ app = FastAPI()
 @app.get("/docs")
 async def graphql_docs():
     html = graphdoc.to_doc(schema)
+    return Response(content=html, media_type="text/html")
+```
+
+## Documenting multiple API
+
+The `graphdoc.to_doc` method takes any schema, so you can create documentation
+for multiple APIs in the same project.
+
+This is an example using Graphene 2 and FastAPI
+
+```python
+# cities_api.py
+import graphene
+
+class Query(graphene.ObjectType):
+    cities = graphene.List(graphene.String)
+
+    def resolve_cities(self, info):
+        return ['Mexico City', 'New York', 'San Francisco']
+
+schema = graphene.Schema(query=Query)
+```
+
+```python
+# countries_api.py
+import graphene
+
+class Query(graphene.ObjectType):
+    countries = graphene.List(graphene.String)
+
+    def resolve_countries(self, info):
+        return ['Canada', 'France', 'Mexico']
+
+schema = graphene.Schema(query=Query)
+```
+
+```python
+# main.py
+from fastapi import FastAPI, Response
+import graphdoc
+
+import cities_api
+import countries_api
+
+app = FastAPI()
+
+@app.get("/cities/docs")
+async def graphql_cities_docs():
+    html = graphdoc.to_doc(cities_api.schema)
+    return Response(content=html, media_type="text/html")
+
+@app.get("/countries/docs")
+async def graphql_countries_docs():
+    html = graphdoc.to_doc(countries_api.schema)
     return Response(content=html, media_type="text/html")
 ```
