@@ -4,7 +4,7 @@ upload.sh
 .idea/
 *venv/
 __pycache__/
-testing_server/
+server/
 dist/
 build/
 *.egg-info/

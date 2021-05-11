@@ -33,8 +33,8 @@
         {% for io in reference.input_objects %}
         <div>
             <div>
-                <h3 id="io-{{ name|slugify }}" class="pt-3">
-                    <a href="#io-{{ name|slugify }}">{{ io.name }}</a>
+                <h3 id="io-{{ io.name|slugify }}" class="pt-3">
+                    <a href="#io-{{ io.name|slugify }}">{{ io.name }}</a>
                 </h3>
                 {{ io.description|default('', True)|markdown|safe }}
             </div>
