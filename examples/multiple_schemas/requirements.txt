@@ -1,0 +1,4 @@
+fastapi==0.65.0
+graphdoc>=0.3.0
+graphene==2.1.8
+uvicorn==0.13.4

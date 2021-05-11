@@ -9,6 +9,33 @@
         </div>
     </div>
     <div id="article-contents" class="article-grid-body">
-        {{ configs.about_description|markdown|safe }}
+        <h3>About GraphQL</h3>
+        <p>The <a href="https://graphql.github.io/">GraphQL</a> data query language is:</p>
+        <ul>
+        <li>
+            <p><strong>A <a href="http://spec.graphql.org/June2018/">specification</a></strong>. The spec determines the
+            validity of the schema on the API server. The schema determines the validity of
+            client calls.</p>
+        </li>
+        <li>
+            <p><strong>Strongly typed</strong>. The schema defines an API's type system and all object
+            relationships.</p>
+        </li>
+        <li>
+            <p><strong>Introspective</strong>. A client can query the schema for details about the schema.</p>
+        </li>
+        <li>
+            <p><strong>Hierarchical</strong>. The shape of a GraphQL call mirrors the shape of the JSON data
+            it returns. Nested fields let you query for and receive only the data you specify
+            in a single round trip.</p>
+        </li>
+        <li>
+            <p><strong>An application layer</strong>. GraphQL is not a storage model or a database query
+            language. The graph refers to graph structures defined in the schema, where nodes
+            define objects and edges define relationships between objects. The API traverses
+            and returns application data based on the schema definitions, independent of how
+            the data is stored.</p>
+        </li>
+        </ul>
     </div>
 </div>
