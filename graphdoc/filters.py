@@ -22,7 +22,7 @@ def gql_group(value) -> str:
     elif isinstance(value, graphql.GraphQLEnumType):
         return 'enums'
     elif isinstance(value, graphql.GraphQLInputObjectType):
-        return 'input-objects'
+        return 'io'
     return ''
 
 
