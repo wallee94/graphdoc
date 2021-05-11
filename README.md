@@ -75,7 +75,7 @@ to a templates folder. Templates are loaded using jinja's
 [FileSystemLoader](https://jinja.palletsprojects.com/en/2.11.x/api/#jinja2.FileSystemLoader).
 
 Files in this folder will override the default templates. Take a look
-to the default [here](https://github.com/wallee94/graphdoc/tree/main/graphdoc/templates).
+to the defaults [here](https://github.com/wallee94/graphdoc/tree/main/graphdoc/templates).
 
 You can find more example apps using custom templates and documenting multiple schemas 
-in the [examples folder](https://github.com/wallee94/graphdoc/tree/main/graphdoc)
+in the [examples folder](https://github.com/wallee94/graphdoc/tree/main/examples)
