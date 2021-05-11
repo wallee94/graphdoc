@@ -9,7 +9,7 @@ schema = load_schema_from_path("../schema.graphql")
 
 
 def schema_docs(request):
-    html = graphdoc.to_doc(schema, './templates')
+    html = graphdoc.to_doc(schema, './templates', use_cache=False)
     return HTMLResponse(html)
 
 

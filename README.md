@@ -68,56 +68,14 @@ async def graphql_docs():
     return Response(content=html, media_type="text/html")
 ```
 
-## Documenting multiple API
+## Custom templates
 
-The `graphdoc.to_doc` method takes any schema, so you can create documentation
-for multiple APIs in the same project.
+The `graphdoc.to_doc` method accepts a second argument with a path
+to a templates folder. Templates are loaded using jinja's 
+[FileSystemLoader](https://jinja.palletsprojects.com/en/2.11.x/api/#jinja2.FileSystemLoader).
 
-This is an example using Graphene 2 and FastAPI
+Files in this folder will override the default templates. Take a look
+to the default [here](https://github.com/wallee94/graphdoc/tree/main/graphdoc/templates).
 
-```python
-# cities_api.py
-import graphene
-
-class Query(graphene.ObjectType):
-    cities = graphene.List(graphene.String)
-
-    def resolve_cities(self, info):
-        return ['Mexico City', 'New York', 'San Francisco']
-
-schema = graphene.Schema(query=Query)
-```
-
-```python
-# countries_api.py
-import graphene
-
-class Query(graphene.ObjectType):
-    countries = graphene.List(graphene.String)
-
-    def resolve_countries(self, info):
-        return ['Canada', 'France', 'Mexico']
-
-schema = graphene.Schema(query=Query)
-```
-
-```python
-# main.py
-from fastapi import FastAPI, Response
-import graphdoc
-
-import cities_api
-import countries_api
-
-app = FastAPI()
-
-@app.get("/cities/docs")
-async def graphql_cities_docs():
-    html = graphdoc.to_doc(cities_api.schema)
-    return Response(content=html, media_type="text/html")
-
-@app.get("/countries/docs")
-async def graphql_countries_docs():
-    html = graphdoc.to_doc(countries_api.schema)
-    return Response(content=html, media_type="text/html")
-```
+You can find more example apps using custom templates and documenting multiple schemas 
+in the [examples folder](https://github.com/wallee94/graphdoc/tree/main/graphdoc)
