@@ -3,13 +3,6 @@ from typing import Union
 
 import graphql
 
-try:
-    # graphql-core>=3.1.0,<4
-    from graphql.utilities import build_ast_schema
-except ImportError:
-    # graphql-core>=2.1.0,<3
-    from graphql.utils.build_ast_schema import build_ast_schema
-
 from . import definitions
 
 GraphQLEnumValue = namedtuple('GraphQLEnumValue', ('name', 'values'))
@@ -37,7 +30,7 @@ def build_types_reference(
     # parse schema to ast obj and filter out native graphql types
     if isinstance(schema, str):
         document_ast = graphql.parse(schema)
-        schema = build_ast_schema(document_ast)
+        schema = graphql.build_ast_schema(document_ast)
 
     # graphql-core>=3.1.0,<4 has a type_map attr, but graphql-core>=2.1.0,<3
     # uses get_type_map

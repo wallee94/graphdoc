@@ -3,7 +3,8 @@ from unittest import TestCase
 
 from graphdoc.utilities import build_types_reference
 
-with open(os.path.join(os.path.dirname(__file__), 'sw-schema.graphql'), 'r') as f:
+path = os.path.join(os.path.dirname(__file__), '..', 'files', 'sw-schema.graphql')
+with open(path, 'r') as f:
     SCHEMA = f.read()
 
 
