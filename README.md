@@ -68,14 +68,19 @@ async def graphql_docs():
     return Response(content=html, media_type="text/html")
 ```
 
+## API
+
+#### `graphdoc.to_doc(schema, templates_folder=None, context=None)`
+
+**schema**: `GraphQLSchema` instance or a str with a schema in SDL.
+
+**templates_folder**: Optional path to a templates folder. If received,
+Jinja will look for templates in this folder before falling back to the defaults
+[here](https://github.com/wallee94/graphdoc/tree/main/graphdoc/templates).
+
+**context**: An optional custom dictionary to be passed to the templates variables.
+
 ## Custom templates
-
-The `graphdoc.to_doc` method accepts a second argument with a path
-to a templates folder. Templates are loaded using jinja's 
-[FileSystemLoader](https://jinja.palletsprojects.com/en/2.11.x/api/#jinja2.FileSystemLoader).
-
-Files in this folder will override the default templates. Take a look
-to the defaults [here](https://github.com/wallee94/graphdoc/tree/main/graphdoc/templates).
 
 You can find more example apps using custom templates and documenting multiple schemas 
 in the [examples folder](https://github.com/wallee94/graphdoc/tree/main/examples)
