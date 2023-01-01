@@ -2,6 +2,7 @@ upload.sh
 *.pyc
 
 .idea/
+.vscode/
 *venv/
 __pycache__/
 dist/
