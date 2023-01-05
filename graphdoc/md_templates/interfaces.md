@@ -14,6 +14,7 @@ Interfaces serve as parent objects from which other objects can inherit.
 {% endif %}
 
 ### Fields
+
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
 {% for name, field in interface.fields.items() %}| {{ name }} | {{ field.type|string }} |  {{ field.description|default('', True)|markdown|safe }} |   
@@ -24,6 +25,7 @@ Interfaces serve as parent objects from which other objects can inherit.
 {% for name, field in interface.fields.items() %}
 {% if field.args %}
 #### {{ name }}
+
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
 {% for arg_name, arg in field.args.items() %}|  {{ arg_name }} | {{ arg.type|string }} | {{ arg.description|default('', True)|markdown|safe }} |

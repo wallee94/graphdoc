@@ -13,6 +13,7 @@ The query type defines GraphQL operations that retrieve data from the server.
 {% for name, field in reference.query.fields|dictsort %}
 {% if field.args %}
 #### {{ name }}
+
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
 {% for arg_name, arg in field.args.items() %}| {{ arg_name }} | {{ arg.type|string }} | {{ arg.description|default('', True)|markdown|safe }} |

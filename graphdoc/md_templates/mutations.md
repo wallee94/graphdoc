@@ -14,6 +14,7 @@ It is analogous to performing HTTP verbs such as POST, PATCH, and DELETE.
 {% for name, field in reference.mutation.fields|dictsort %}
 {% if field.args %}
 #### {{ name }}
+
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
 {% for arg_name, arg in field.args.items() %}| {{ arg_name }} | {{ arg.type|string }} | {{ arg.description|default('', True)|markdown|safe }} |
@@ -25,6 +26,7 @@ It is analogous to performing HTTP verbs such as POST, PATCH, and DELETE.
 {% for name, field in reference.mutation.fields|dictsort %}
 {% if field.args %}
 #### {{ name }}
+
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
 {% for return_name, return in field.unwrapped_type.fields.items() %}| {{ return_name }} | {{ return.type|string }} | {{ return.description|default('', True)|markdown|safe }} |
