@@ -1,6 +1,6 @@
 name: suggestic-coach-portal
 
-on: [ push ]
+on: [ push, pull_request ]
 
 jobs:
   tests:
