@@ -11,8 +11,10 @@ jobs:
         multiple-versions: [ 'on' ]
         include:
           - graphql-core-version: '>=2.1.0,<3'
+            graphene-tests: graphene_2
             multiple-versions: 'on'
           - graphql-core-version: '>=3.1.5,<4'
+            graphene-tests: graphene_3
             multiple-versions: 'on'
     steps:
       - uses: actions/checkout@v2
@@ -28,4 +30,4 @@ jobs:
       - name: Run tests
         run: |
           python -m unittest discover -s $(pwd)/tests/common -t $(pwd)
-          python -m unittest discover -s $(pwd)/tests/${{ graphene-tests }} -t $(pwd)
+          python -m unittest discover -s $(pwd)/tests/${{ matrix.graphene-tests }} -t $(pwd)
