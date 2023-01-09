@@ -4,8 +4,8 @@ from unittest import TestCase, mock
 import graphdoc
 
 path = os.path.join(os.path.dirname(__file__), 'files', 'sw-schema.graphql')
-with open(path, 'r') as f:
-    SCHEMA = f.read()
+with open(path, 'r') as _f:
+    SCHEMA = _f.read()
 
 
 class ToDocTest(TestCase):
@@ -31,3 +31,17 @@ class ToDocTest(TestCase):
 
         self.assertEqual(kw['custom'], context['custom'])
         self.assertEqual(kw['list'], context['list'])
+
+    def test_html_result(self):
+        with open(os.path.join(os.path.dirname(path), "expected.html"), "r") as f:
+            want = f.read()
+        got = graphdoc.to_doc(SCHEMA, use_cache=False)
+        self.assertEqual(got, want)
+
+    def test_md_result(self):
+        with open(os.path.join(os.path.dirname(path), "expected.md"), "r") as f:
+            want = f.read()
+        got = graphdoc.to_md(SCHEMA, use_cache=False)
+        # with open(os.path.join(os.path.dirname(path), "expected.md"), "r") as f:
+        #     f.write(got)
+        self.assertEqual(got, want)
