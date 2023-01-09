@@ -71,7 +71,4 @@ def to_md(
         doc = _to_doc(schema, templates_path, context)
     else:
         doc = _to_doc.__wrapped__(schema, templates_path, context)
-    # doc = doc.replace("\r\n", "\n").replace("\n\n\n\n", "\n\n")
-    # for s in ["</p>\n", "</p>", "<p>", "<code>", "</code>"]:  # the order matters
-    #     doc = doc.replace(s, "")
     return doc
