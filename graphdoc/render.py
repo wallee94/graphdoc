@@ -1,5 +1,6 @@
 from functools import lru_cache
 from typing import Optional, Union
+import os
 
 import graphql
 from jinja2 import (
@@ -40,11 +41,32 @@ def to_doc(
         context: Optional[dict] = None,
         use_cache=True
 ) -> str:
-    """
-    Returns an html with the documentation from the schema
-    """
+    """ Returns an html with the documentation from the schema """
     if context is not None and use_cache:
         raise ValueError('use_cache must be False if context is not None')
     if use_cache is True:
         return _to_doc(schema, templates_path, context)
     return _to_doc.__wrapped__(schema, templates_path, context)
+
+
+def to_md(
+        schema: Union[str, graphql.GraphQLSchema],
+        templates_path: str = None,
+        context: Optional[dict] = None,
+        use_cache=True
+) -> str:
+    """ Returns a Markdown document with the documentation from the schema """
+    if context is not None and use_cache:
+        raise ValueError('use_cache must be False if context is not None')
+    if templates_path is None:
+        templates_path = __file__.split(os.sep)
+        templates_path[-1] = "md_templates"
+        templates_path = os.sep.join(templates_path)
+    if use_cache is True:
+        doc = _to_doc(schema, templates_path, context)
+    else:
+        doc = _to_doc.__wrapped__(schema, templates_path, context)
+    doc = doc.replace("\r\n", "\n").replace("\n\n\n\n", "\n\n")
+    for s in ["</p>\n", "</p>", "<p>", "<code>", "</code>"]:  # the order matters
+        doc = doc.replace(s, "")
+    return doc

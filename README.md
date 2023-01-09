@@ -15,8 +15,9 @@ Install using pip:
 
 ## Usage
 
-Use `graphdoc.to_doc` to create documentation from a `GraphQLSchema` instance 
-or a string with your schema in SDL.
+Use `graphdoc.to_doc` to create HTML documentation 
+from a `GraphQLSchema` instance or a string with your schema in SDL.
+Use `graphdoc.to_md` to create Markdown documentation.
 
 ## Examples
 

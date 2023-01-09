@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/wallee94/graphdoc",
     packages=setuptools.find_packages(),
-    package_data={'graphdoc': ['templates/*.html']},
+    package_data={'graphdoc': ['templates/*.html', 'md_templates/*.*']},
     install_requires=[
         'graphql-core>=2.1.0,<4',
         'Jinja2>=2',
