@@ -6,14 +6,14 @@ contain a list of fields, which are specifically typed.
 
 {% for object in reference.objects %}
 ### {{ object.name }} 
-{{ object.description|default('', True)|markdown|safe }}
+{{ object.description|default('', True)|replace("\n", "")|replace("\r", "")|safe }}
 
 {% if object.fields %}
 #### Fields
 
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
-{% for name, field in object.fields.items() %}| {{ name }} | {{ field.type|string }} | {{ field.description|default('', True)|markdown|safe }} |
+{% for name, field in object.fields.items() %}| {{ name }} | {{ field.type|string }} | {{ field.description|default('', True)|replace("\n", "")|replace("\r", "")|safe }} |
 {% endfor %}
 {% endif %}
 {% endfor %}

@@ -42,6 +42,4 @@ class ToDocTest(TestCase):
         with open(os.path.join(os.path.dirname(path), "expected.md"), "r") as f:
             want = f.read()
         got = graphdoc.to_md(SCHEMA, use_cache=False)
-        # with open(os.path.join(os.path.dirname(path), "expected.md"), "r") as f:
-        #     f.write(got)
         self.assertEqual(got, want)

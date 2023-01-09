@@ -7,7 +7,7 @@ It is analogous to performing HTTP verbs such as POST, PATCH, and DELETE.
 
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
-{% for name, field in reference.mutation.fields|dictsort %}| {{ name }} | {{ field.type|string }} | {{ field.description|default('', True)|markdown|safe }} |
+{% for name, field in reference.mutation.fields|dictsort %}| {{ name }} | {{ field.type|string }} | {{ field.description|default('', True)|replace("\n", "")|replace("\r", "")|safe }} |
 {% endfor %}
 
 ### Mutations' arguments
@@ -17,7 +17,7 @@ It is analogous to performing HTTP verbs such as POST, PATCH, and DELETE.
 
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
-{% for arg_name, arg in field.args.items() %}| {{ arg_name }} | {{ arg.type|string }} | {{ arg.description|default('', True)|markdown|safe }} |
+{% for arg_name, arg in field.args.items() %}| {{ arg_name }} | {{ arg.type|string }} | {{ arg.description|default('', True)|replace("\n", "")|replace("\r", "")|safe }} |
 {% endfor %}
 {% endif %}
 {% endfor %}
@@ -29,7 +29,7 @@ It is analogous to performing HTTP verbs such as POST, PATCH, and DELETE.
 
 | **Name** | **Type** | **Description** |
 |----------|----------|-----------------|
-{% for return_name, return in field.unwrapped_type.fields.items() %}| {{ return_name }} | {{ return.type|string }} | {{ return.description|default('', True)|markdown|safe }} |
+{% for return_name, return in field.unwrapped_type.fields.items() %}| {{ return_name }} | {{ return.type|string }} | {{ return.description|default('', True)|replace("\n", "")|replace("\r", "")|safe }} |
 {% endfor %}
 {% endif %}
 {% endfor %}
