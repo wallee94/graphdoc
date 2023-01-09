@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ${{ matrix.graphql-core-version }}
+          pip install graphql-core${{ matrix.graphql-core-version }}
           pip install -f requirements.txt
       - name: Run tests
         run: |
