@@ -6,5 +6,5 @@ the GraphQL API, you must specify nested subfields until you return only scalars
 
 {% for scalar in reference.scalars %}
 ### {{ scalar.name }}
-{{ scalar.description|default('', True)|markdown|safe }}
+{{ scalar.description|default('', True)|replace("\n", "")|replace("\r", "")|safe }}
 {% endfor %}
