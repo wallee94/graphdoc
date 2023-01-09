@@ -12,18 +12,18 @@ markdowner = Markdown()
 def gql_group(value) -> str:
     value = unwrap_field_type(value)
     if isinstance(value, graphql.GraphQLObjectType):
-        return 'objects'
+        return "objects"
     elif isinstance(value, graphql.GraphQLScalarType):
-        return 'scalars'
+        return "scalars"
     elif isinstance(value, graphql.GraphQLInterfaceType):
-        return 'interfaces'
+        return "interfaces"
     elif isinstance(value, graphql.GraphQLUnionType):
-        return 'unions'
+        return "unions"
     elif isinstance(value, graphql.GraphQLEnumType):
-        return 'enums'
+        return "enums"
     elif isinstance(value, graphql.GraphQLInputObjectType):
-        return 'io'
-    return ''
+        return "io"
+    return ""
 
 
 def markdown(value):
@@ -37,7 +37,7 @@ def slugify(value):
     Convert to lowercase. Also strip leading and trailing whitespace.
     """
     value = str(value)
-    value = unicodedata.normalize('NFKD', value)
-    value = value.encode('ascii', 'ignore').decode('ascii')
-    value = re.sub(r'[^\w\s-]', '', value).strip().lower()
-    return re.sub(r'[-\s]+', '-', value)
+    value = unicodedata.normalize("NFKD", value)
+    value = value.encode("ascii", "ignore").decode("ascii")
+    value = re.sub(r"[^\w\s-]", "", value).strip().lower()
+    return re.sub(r"[-\s]+", "-", value)

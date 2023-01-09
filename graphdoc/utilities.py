@@ -5,11 +5,11 @@ import graphql
 
 from . import definitions
 
-GraphQLEnumValue = namedtuple('GraphQLEnumValue', ('name', 'values'))
+GraphQLEnumValue = namedtuple("GraphQLEnumValue", ("name", "values"))
 
 
 def unwrap_field_type(
-        field_type: graphql.type.definition.GraphQLOutputType
+    field_type: graphql.type.definition.GraphQLOutputType,
 ) -> graphql.type.definition.GraphQLOutputType:
     """
     Unwraps field type from NonNull and List GraphQL type wrappers
@@ -20,7 +20,7 @@ def unwrap_field_type(
 
 
 def build_types_reference(
-        schema: Union[str, graphql.GraphQLSchema]
+    schema: Union[str, graphql.GraphQLSchema]
 ) -> definitions.TypeMapReference:
     """
     Parse schema string to a TypeMapReference instance with definition from the schema
@@ -34,15 +34,16 @@ def build_types_reference(
 
     # graphql-core>=3.1.0,<4 has a type_map attr, but graphql-core>=2.1.0,<3
     # uses get_type_map
-    type_map = schema.type_map if hasattr(schema, 'type_map') else schema.get_type_map()
+    type_map = schema.type_map if hasattr(schema, "type_map") else schema.get_type_map()
     type_map = {
-        k: v for k, v in sorted(type_map.items(), key=lambda t: t[1].name)
-        if not k.startswith('__')
+        k: v
+        for k, v in sorted(type_map.items(), key=lambda t: t[1].name)
+        if not k.startswith("__")
     }
 
     # separate the different type definitions in the schema
     reference = definitions.TypeMapReference()
-    if hasattr(schema, 'query_type') and hasattr(schema, 'mutation_type'):
+    if hasattr(schema, "query_type") and hasattr(schema, "mutation_type"):
         # graphql-core>=3.1.0,<4
         reference.query = schema.query_type
         reference.mutation = schema.mutation_type
@@ -88,6 +89,6 @@ def build_types_reference(
             reference.input_objects.append(obj)
 
     for interface in reference.interfaces:
-        setattr(interface, 'implemented_by', implemented_by[interface.name])
+        setattr(interface, "implemented_by", implemented_by[interface.name])
 
     return reference

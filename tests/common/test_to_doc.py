@@ -3,7 +3,7 @@ from unittest import TestCase, mock
 
 import graphdoc
 
-path = os.path.join(os.path.dirname(__file__), 'files', 'sw-schema.graphql')
+path = os.path.join(os.path.dirname(__file__), '../files', 'sw-schema.graphql')
 with open(path, 'r') as _f:
     SCHEMA = _f.read()
 
