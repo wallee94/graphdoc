@@ -10,11 +10,9 @@ jobs:
         python-version: [ 3.8 ]
         multiple-versions: [ 'on' ]
         include:
-          - graphql-core-version: ">=2.1.0,<3"
-            graphene-tests: graphene_2
+          - graphql-core-version: '>=2.1.0,<3'
             multiple-versions: 'on'
-          - graphql-core-version: ">=3.1.5,<4"
-            graphene-tests: graphene_3
+          - graphql-core-version: '>=3.1.5,<4'
             multiple-versions: 'on'
     steps:
       - uses: actions/checkout@v2
