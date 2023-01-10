@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ 3.8 ]
-        multiple-versions: [ 'on' ]
+        python-version: [ 3.8, 3.9, 3.10, 3.11 ]
+        gql-version: [ 2, 3 ]
         include:
           - graphene-version: '>=2.1.0,<3'
             graphene-tests: graphene_2
-            multiple-versions: 'on'
+            gql-version: 2
           - graphene-version: '>=3,<4'
             graphene-tests: graphene_3
-            multiple-versions: 'on'
+            gql-version: 3
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
