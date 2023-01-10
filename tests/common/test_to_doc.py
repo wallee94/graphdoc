@@ -2,10 +2,7 @@ import os
 from unittest import TestCase, mock
 
 import graphdoc
-
-path = os.path.join(os.path.dirname(__file__), 'files', 'sw-schema.graphql')
-with open(path, 'r') as _f:
-    SCHEMA = _f.read()
+from . import SCHEMA, path, graphql_version
 
 
 class ToDocTest(TestCase):
@@ -33,13 +30,13 @@ class ToDocTest(TestCase):
         self.assertEqual(kw['list'], context['list'])
 
     def test_html_result(self):
-        with open(os.path.join(os.path.dirname(path), "expected.html"), "r") as f:
+        with open(os.path.join(path, f"expected-{graphql_version}.html"), "r") as f:
             want = f.read()
         got = graphdoc.to_doc(SCHEMA, use_cache=False)
         self.assertEqual(got, want)
 
     def test_md_result(self):
-        with open(os.path.join(os.path.dirname(path), "expected.md"), "r") as f:
+        with open(os.path.join(path, f"expected-{graphql_version}.md"), "r") as f:
             want = f.read()
         got = graphdoc.to_md(SCHEMA, use_cache=False)
         self.assertEqual(got, want)

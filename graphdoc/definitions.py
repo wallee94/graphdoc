@@ -6,7 +6,8 @@ import graphql
 
 class GraphQLField:
     """Composition to add unwrapped_field to graphql.GraphQLField. GraphQLField uses
-    slots, so we cannot just set the attr """
+    slots, so we cannot just set the attr"""
+
     unwrapped_type: graphql.GraphQLObjectType = None
     _graphql_field: graphql.GraphQLField
 
@@ -20,6 +21,7 @@ class GraphQLField:
 @dataclass
 class TypeMapReference:
     """Stores the different types found in a schema"""
+
     query: graphql.GraphQLObjectType = None
     mutation: graphql.GraphQLObjectType = None
 
