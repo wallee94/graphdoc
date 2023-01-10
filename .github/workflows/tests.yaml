@@ -10,10 +10,10 @@ jobs:
         python-version: [ 3.8 ]
         multiple-versions: [ 'on' ]
         include:
-          - graphql-core-version: '>=2.1.0,<3'
+          - graphene-version: '>=2.1.0,<3'
             graphene-tests: graphene_2
             multiple-versions: 'on'
-          - graphql-core-version: '>=3.1.5,<4'
+          - graphene-version: '>=3,<4'
             graphene-tests: graphene_3
             multiple-versions: 'on'
     steps:
@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install 'graphql-core${{ matrix.graphql-core-version }}'
+          python -m pip install 'graphene{{ matrix.graphql-core-version }}'
           python -m pip install -r requirements.txt
       - name: Run tests
         run: |
