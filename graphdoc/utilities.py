@@ -56,6 +56,12 @@ def build_types_reference(
         for name, field in reference.mutation.fields.items():
             # Wrap all mutation fields to set the unwrapped_type attr
             unwrapped_type = unwrap_field_type(field.type)
+            if not hasattr(unwrapped_type, 'type'):
+                unwrapped_type.type = field.type
+            if not hasattr(unwrapped_type, 'fields'):
+                unwrapped_type.fields = {
+                    unwrapped_type.name: unwrapped_type,
+                }
             wrapper = definitions.GraphQLField(field)
             wrapper.unwrapped_type = unwrapped_type
             reference.mutation.fields[name] = wrapper
