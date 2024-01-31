@@ -46,8 +46,6 @@ def to_doc(
     use_cache=True,
 ) -> str:
     """Returns an html with the documentation from the schema"""
-    if hasattr(schema, "_schema"):
-        schema = schema._schema
     if context is not None and use_cache:
         raise ValueError("use_cache must be False if context is not None")
     if use_cache is True:
