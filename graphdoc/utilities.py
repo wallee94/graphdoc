@@ -16,7 +16,7 @@ def unwrap_field_type(
     """
     while isinstance(field_type, (graphql.GraphQLNonNull, graphql.GraphQLList)):
         field_type = field_type.of_type
-    if not hasattr(field_type, 'type'):
+    if not hasattr(field_type, "type"):
         field_type.type = field_type
     return field_type
 
@@ -58,7 +58,7 @@ def build_types_reference(
         for name, field in reference.mutation.fields.items():
             # Wrap all mutation fields to set the unwrapped_type attr
             unwrapped_type = unwrap_field_type(field.type)
-            if not hasattr(unwrapped_type, 'fields'):
+            if not hasattr(unwrapped_type, "fields"):
                 unwrapped_type.fields = {name: field}
             wrapper = definitions.GraphQLField(field)
             wrapper.unwrapped_type = unwrapped_type
